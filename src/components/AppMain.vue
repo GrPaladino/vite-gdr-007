@@ -1,17 +1,29 @@
 <script>
 import { store } from "../store";
 import CharCard from "./CharCard.vue";
+// IMPORTA AXIOS
 
 export default {
   data() {
     return {
-      // store,
+      store,
+      isSelected: false,
     };
   },
 
   components: { CharCard },
 
-  methods: {},
+  methods: {
+    getCharacters() {
+      axios.get("url").then((res) => {
+        store.characters = res.data;
+      });
+    },
+  },
+
+  created() {
+    this.getCharacters();
+  },
 };
 </script>
 
@@ -19,8 +31,10 @@ export default {
   <div class="container mt-5">
     <label for="characters"><b class="fs-4">Choose a character:</b></label>
     <select class="form-select" name="characters" id="characters">
-      <option value="1">Arthur</option>
-      <option value="2">Elena</option>
+      <option v-for="charact in store.characters" :value="charact.id">
+        {{ charact.name }}
+      </option>
+      <!-- <option value="2">Elena</option>
       <option value="3">Gareth</option>
       <option value="4">Sylvia</option>
       <option value="5">Liam</option>
@@ -31,7 +45,7 @@ export default {
       <option value="10">Luna</option>
       <option value="11">Xander</option>
       <option value="12">Sophia</option>
-      <option value="13">Maximus</option>
+      <option value="13">Maximus</option> -->
     </select>
     <div class="row mt-5">
       <div class="col">
