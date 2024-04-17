@@ -4,3 +4,7 @@
 // # Bootstrap scss
 @import "bootstrap/scss/bootstrap";
 
+.col {
+  justify-content: space-around;
+  display: flex;
+}

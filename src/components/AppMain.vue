@@ -1,26 +1,24 @@
 <script>
+import { store } from "../store";
+import CharCard from "./CharCard.vue";
+// IMPORTA AXIOS
 // import { store } from "../store";
 import axios from "axios";
 
 export default {
   data() {
     return {
+      store,
+      isSelected: false,
+    };
       characters: [],
     };
   },
 
-  components: {},
-
-  methods: {
-    fetchCharacters() {
-      axios.get("http://127.0.0.1:8000/api/characters").then((response) => {
-        this.characters = response.data.characters;
-      });
-    },
+  components: {
   },
 
-  created() {
-    this.fetchCharacters();
+  methods: {
   },
 };
 </script>
