@@ -9,17 +9,55 @@ export default {
   data() {
     return {
       store,
-      isSelected: false,
+      iswin: false,
+      isdefeat: false,
+      isEven: false,
+      selectValue: -1,
+      mainCharacter: "",
+      computerCharacter: "",
     };
   },
 
-  components: {},
+  components: { CharCard },
 
   methods: {
     fetchcharacters() {
       axios.get("http://127.0.0.1:8000/api/characters").then((response) => {
         store.characters = response.data.characters;
       });
+    },
+
+    fetchMainCharacter() {
+      if (this.selectValue != -1) {
+        this.mainCharacter = store.characters[this.selectValue];
+      }
+    },
+
+    getRandomInt(min, max) {
+      const minCeiled = Math.ceil(min);
+      const maxFloored = Math.floor(max);
+      return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+    },
+
+    fetchOpponentCharacter() {
+      let randNumber = this.getRandomInt(0, 12);
+      this.computerCharacter = store.characters[randNumber];
+    },
+
+    fetchWinner() {
+      let ourStrength = this.mainCharacter.strength;
+      let computerDefence = this.computerCharacter.defence;
+      this.iswin = false;
+      this.isdefeat = false;
+      this.isEven = false;
+
+      if (ourStrength > computerDefence) {
+        this.iswin = true;
+      } else if (ourStrength < computerDefence) {
+        this.isdefeat = true;
+      } else {
+        this.isEven = true;
+      }
     },
   },
 
@@ -31,31 +69,38 @@ export default {
 
 <template>
   <div class="container mt-5">
-    <label for="characters"><b class="fs-4">Choose a character:</b></label>
-    <select class="form-select" name="characters" id="characters">
-      <option v-for="charact in store.characters" :value="charact.id">
+    <label for="characters"><b class="fs-4 mb-5">Choose a character:</b></label>
+    <select
+      class="form-select mt-2"
+      name="characters"
+      id="characters"
+      @change="fetchMainCharacter(), fetchOpponentCharacter()"
+      v-model="selectValue">
+      <option value="-1">Choose a character</option>
+      <option v-for="(charact, index) in store.characters" :value="index">
         {{ charact.name }}
       </option>
-      <!-- <option value="2">Elena</option>
-      <option value="3">Gareth</option>
-      <option value="4">Sylvia</option>
-      <option value="5">Liam</option>
-      <option value="6">Isabella</option>
-      <option value="7">Oscar</option>
-      <option value="8">Aria</option>
-      <option value="9">Victor</option>
-      <option value="10">Luna</option>
-      <option value="11">Xander</option>
-      <option value="12">Sophia</option>
-      <option value="13">Maximus</option> -->
     </select>
     <div class="row mt-5">
-      <div class="col">
-        <char-card />
+      <div class="col-6">
+        <char-card v-if="mainCharacter" :character="mainCharacter" />
       </div>
-      <div class="col">
-        <char-card />
+      <div class="col-6">
+        <char-card v-if="computerCharacter" :character="computerCharacter" />
       </div>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+      <button
+        @click="fetchWinner()"
+        v-if="mainCharacter"
+        class="btn btn-success text-center">
+        Play
+      </button>
+    </div>
+    <div class="result d-flex justify-content-center mt-4">
+      <h2 v-if="iswin" class="text-success">You Won!!</h2>
+      <h2 v-if="isdefeat" class="text-danger">You Lost, try again!!!!!!!!</h2>
+      <h2 v-if="isEven" class="text-primary">Even, try again!!!!</h2>
     </div>
   </div>
 </template>

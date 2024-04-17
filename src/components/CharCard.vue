@@ -10,25 +10,52 @@ export default {
 
   components: {},
 
-  //   props: { randomChar },
+  props: { character: [Object] },
 
   methods: {},
 };
 </script>
 
 <template>
-  <div class="card" style="width: 18rem">
-    <!-- <img src="..." class="card-img-top" alt="..." /> -->
-    <div class="card-body">
-      <!--Nome del personaggio-->
-      <h5 class="card-title">Card title</h5>
-      <!--Descrizione personaggio-->
-      <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
-      </p>
-      <!-- Conferma scelta -->
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div class="card h-100">
+    <!--Nome del personaggio-->
+    <h5 class="card-title mb-2 text-center mt-2">{{ character.name }}</h5>
+    <div class="card-body d-flex">
+      <div class="left me-2 w-50">
+        <!--Descrizione personaggio-->
+        <p class="card-text">
+          <strong>Defence: </strong>
+          {{ character.defence }}
+        </p>
+        <p class="card-text">
+          <strong>Intelligence: </strong>
+          {{ character.intelligence }}
+        </p>
+        <p class="card-text">
+          <strong>HP: </strong>
+          {{ character.life }}
+        </p>
+        <p class="card-text">
+          <strong>Speed: </strong>
+          {{ character.speed }}
+        </p>
+        <p class="card-text">
+          <strong>Strength: </strong>
+          {{ character.strength }}
+        </p>
+      </div>
+
+      <div class="right w-50">
+        <p class="text-center fs-4">
+          <strong>{{ character.type.name }}</strong>
+        </p>
+        <div class="img">
+          <img
+            :src="character.type.img"
+            alt=""
+            class="img-thumbnail border-0" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
