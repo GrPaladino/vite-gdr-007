@@ -33,6 +33,7 @@ import {
   faEnvelope,
   faPaperPlane,
   faCopyright,
+  faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -68,7 +69,8 @@ library.add(
   faGooglePlusG,
   faSkype,
   faInstagram,
-  faCopyright
+  faCopyright,
+  faInfo
 );
 
 import App from "./App.vue";
