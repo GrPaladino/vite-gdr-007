@@ -11,14 +11,20 @@ export default {
       store,
       isSelected: false,
     };
-      characters: [],
-    };
   },
 
-  components: {
-  },
+  components: {},
 
   methods: {
+    fetchcharacters() {
+      axios.get("http://127.0.0.1:8000/api/characters").then((response) => {
+        store.characters = response.data.characters;
+      });
+    },
+  },
+
+  created() {
+    this.fetchcharacters();
   },
 };
 </script>
