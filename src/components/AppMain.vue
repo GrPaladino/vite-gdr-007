@@ -32,8 +32,10 @@ export default {
     },
 
     fetchMainCharacter() {
+      this.fetchcharacters();
       if (this.selectValue != -1) {
         this.mainCharacter = store.characters[this.selectValue];
+
         this.isWin = false;
         this.isDefeat = false;
         this.isEven = false;
@@ -52,19 +54,6 @@ export default {
         randNumber = this.getRandomInt(0, 12);
       }
       this.computerCharacter = store.characters[randNumber];
-    },
-
-    fetchWinner() {
-      let ourStrength = this.mainCharacter.strength;
-      let computerDefence = this.computerCharacter.defence;
-
-      if (ourStrength > computerDefence) {
-        this.iswin = true;
-      } else if (ourStrength < computerDefence) {
-        this.isdefeat = true;
-      } else {
-        this.isEven = true;
-      }
     },
 
     fetchAttack() {
@@ -148,9 +137,6 @@ export default {
 
 <template>
   <div class="container mt-5 py-4">
-    <!-- <label for="characters"
-      ><b class="fs-2 mb-5 text-light">Choose a character:</b></label
-    > -->
     <select
       class="form-select mt-2"
       name="characters"
@@ -186,10 +172,17 @@ export default {
         CPU Attacking
       </h3>
     </div>
-    <div class="result d-flex justify-content-center mt-4">
-      <h2 v-if="isWin" class="text-success">You Won!!</h2>
-      <h2 v-if="isDefeat" class="text-danger">GAME OVER</h2>
-      <h2 v-if="isEven" class="text-primary">Even, try again!!!!</h2>
+    <div
+      :class="[
+        isWin || isDefeat ? p - 2 : '',
+        'result',
+        'd-flex',
+        'justify-content-center',
+        'mt-4',
+      ]">
+      <h2 v-if="isWin" class="text-success m-0 fs-1">You Won!!</h2>
+      <h2 v-if="isDefeat" class="text-danger m-0 fs-1">GAME OVER</h2>
+      <h2 v-if="isEven" class="text-primary m-0 fs-1">Even, try again!!!!</h2>
     </div>
   </div>
 </template>
