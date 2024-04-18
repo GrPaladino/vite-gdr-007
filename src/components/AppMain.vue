@@ -200,7 +200,9 @@ export default {
 
 .container {
   height: 90vh;
-  background-image: url("../../public/img/Street-Fighter-Duel-1.jpg");
+  background-image: url("../../img/Street-Fighter-Duel-1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 
   select {
     opacity: 0.8;
