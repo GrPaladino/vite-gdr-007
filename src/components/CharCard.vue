@@ -10,7 +10,7 @@ export default {
 
   components: {},
 
-  props: { character: [Object] },
+  props: { character: [Object], flipImage: Boolean },
 
   methods: {},
 };
@@ -49,7 +49,7 @@ export default {
         <p class="text-center fs-4">
           <strong>{{ character.type.name }}</strong>
         </p>
-        <div class="img">
+        <div :class="flipImage ? 'flip' : ''">
           <img
             :src="character.type.img"
             alt=""
@@ -63,4 +63,15 @@ export default {
 <style lang="scss" scoped>
 @use "../style/partials/mixins" as *;
 @use "../style/partials/variables" as *;
+
+.card {
+  width: 70%;
+  margin: 0 auto;
+  opacity: 0.8;
+  border-radius: 10px;
+
+  .flip {
+    transform: scaleX(-1);
+  }
+}
 </style>

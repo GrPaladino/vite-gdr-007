@@ -30,4 +30,8 @@ export default {
 
 <style lang="scss">
 @use "./style/general.scss";
+
+body {
+  background-color: #1f1f1f;
+}
 </style>
