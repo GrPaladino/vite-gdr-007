@@ -1,15 +1,31 @@
-Continuiamo a lavorare nei gruppi creando una nuova repo per gestire il front-end della nostra applicazione e simulare un gioco tra un utente e il computer:
+# This is our version of your Street Fighter-style combat game web app developed with Vue.js. Here’s how it works:
 
-STEP 1
+- Character Selection:
 
-- interrogare le API del back-end per ottenere un character scelto in modo casuale per l'utente;
-- interrogare le API del back-end per ottenere un character scelto in modo casuale per il computer;
-- mostrare in pagina i dati ottenuti
+  - Users choose a character from the list provided.
+  - The app retrieves this list via an Axios call to the database.
 
-STEP 2
+- CPU Selection:
 
-- implementiamo la seguente logica: confrontiamo la forza del character associato all'utente con la difesa di quello associato al computer
-- se la forza è maggiore della difesa, vince l'utente; se la difesa è maggiore della forza vice il computer; altrimenti è pareggio
+  - After the user selects their character, the CPU randomly chooses one.
+  - The game begins once both characters are selected.
 
-**BONUS:**
-stilizziamo le card in pagina e i risultati
+- Gameplay Mechanics:
+
+  - When the “Play” button is pressed:
+  - The user’s character launches an attack.
+  - Immediately afterward, the CPU’s character counterattacks.
+  - The game logic compares attack points with defense points.
+  - If the difference is positive, the attacked character loses HP (equal to the difference).
+  - If the difference is negative, the attacking character loses HP (equal to the difference).
+  - The game continues until one character’s HP reaches 0.
+
+  ## Screen
+
+  ![screen](/public/img/screen1.jpg)
+
+  ![screen](/public/img/screen2.jpg)
+
+  ![screen](/public/img/screen3.jpg)
+
+  ![screen](/public/img/screen4.jpg)
